@@ -1,0 +1,19 @@
+fragment ARTICLE on media_articles {
+	title_full: page_title_full
+	title_short: page_title_short
+	main_image
+	main_image_preview
+	main_image_mobile
+	slug
+	sections: content_blocks
+	age_rating
+	type
+	settings
+	teaser
+	category {
+		slug
+		title_full
+	}
+	seo
+	issued_at
+}

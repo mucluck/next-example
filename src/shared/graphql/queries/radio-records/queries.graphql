@@ -1,0 +1,35 @@
+query RADIO_RECORDS_PATHS {
+	radioRecords: v_media_radio_records {
+		slug
+	}
+}
+
+query RADIO_RECORDS($limit: Int!, $offset: Int!) {
+	radioRecords: v_media_radio_records(limit: $limit, offset: $offset, order_by: { sort_order: desc }) {
+		title_full: page_title_full
+		title_short: page_title_short
+		main_image
+		main_image_preview
+		slug
+		teaser
+		audio
+		type
+	}
+}
+
+query RADIO_RECORDS_BY_SLUG($slug: String!) {
+	radioRecords: v_media_radio_records(where: { slug: { _eq: $slug } }) {
+		id
+		slug
+		seo
+		audio
+		title_short: page_title_short
+		title_full: page_title_full
+		main_image_preview
+		main_image_mobile
+		main_image
+		sections: content_blocks
+		created_at
+		type
+	}
+}

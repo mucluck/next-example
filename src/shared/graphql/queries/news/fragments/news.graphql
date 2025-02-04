@@ -1,0 +1,46 @@
+fragment NEWS on news {
+	id
+	slug
+	published_at
+	type
+	issued_at
+	main_image
+	sections: content_blocks
+	main_image_preview
+	title_full: page_title_full
+	title_short: page_title_short
+	teaser
+	age_rating
+	category {
+		slug
+		title_full
+	}
+	author {
+		name
+	}
+	settings
+	seo
+}
+
+fragment V_NEWS on v_news {
+	id
+	slug
+	published_at
+	type
+	issued_at
+	main_image
+	sections: content_blocks
+	main_image_preview
+	title_full: page_title_full
+	title_short: page_title_short
+	teaser
+	age_rating
+	category {
+		slug
+		title_full
+	}
+	author {
+		name
+	}
+	settings
+}

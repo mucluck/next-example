@@ -1,0 +1,42 @@
+query ORDERS($kind: String) {
+	orders: userOrders(kind: $kind) {
+		state
+		paymentType
+		id
+		email
+		goals
+		delivery
+		anonymous
+		amount
+		updatedAt
+		trebCategory
+		trebNames
+		trebType
+		paymentData {
+			accountId
+			amount
+			currency
+			description
+			publicId
+			requireEmail
+			invoiceId
+			email
+			data {
+				phone
+			}
+		}
+		payment {
+			type
+		}
+		crowdfundingProject {
+			id
+			title
+			description
+			images
+			mainImage
+			kind
+			place
+			path
+		}
+	}
+}

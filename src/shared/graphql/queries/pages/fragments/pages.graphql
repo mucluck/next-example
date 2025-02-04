@@ -1,0 +1,10 @@
+fragment PAGE on text_pages {
+    slug
+    title_full: page_title_full
+    title_short: page_title_short
+    main_image
+    sections: content_blocks
+    seo
+    type
+    updated_at
+}

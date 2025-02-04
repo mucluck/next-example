@@ -1,0 +1,73 @@
+query WELLS_PATHS {
+	wells {
+		slug
+		city {
+			slug
+		}
+	}
+}
+
+query WELLS_BY_SLUG($slug: String!) {
+	wells(where: { slug: { _eq: $slug } }) {
+		title_full: page_title_full
+		title_short: page_title_short
+		slug
+		main_image
+		main_image_preview
+		main_image_mobile
+		seo
+		sections: content_blocks
+		location_object
+		address
+		telephone
+		openning_hours
+		settings
+		created_at
+		city {
+			title_full
+			slug
+			weather
+		}
+		news: news_wells(limit: 9, order_by: { news: { issued_at: desc } }) {
+			news {
+				title_short: page_title_short
+				title_full: page_title_full
+				main_image
+				main_image_preview
+				slug
+				issued_at
+				category {
+					slug
+					title_full
+				}
+				teaser
+			}
+		}
+		articles: media_articles_wells(limit: 9, order_by: { media_article: { issued_at: desc } }) {
+			media_article {
+				title_short: page_title_short
+				title_full: page_title_full
+				main_image
+				main_image_mobile
+				main_image_preview
+				slug
+				issued_at
+				category {
+					slug
+					title_full
+				}
+				teaser
+			}
+		}
+		tours: virtual_tours_wells {
+			virtual_tour {
+				slug
+				title_short
+				title_full
+				main_image_preview
+				main_image
+				main_image_mobile
+			}
+		}
+	}
+}

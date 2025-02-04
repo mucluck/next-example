@@ -1,0 +1,37 @@
+query TREBS {
+	trebs: crowdfunding_projects(where: { kind: { _eq: "treb" }, deleted_at: { _is_null: true } }) {
+		id
+		payment_receiver_id
+		data
+		set: treb_set {
+			config
+		}
+	}
+}
+
+query CURRENT_ORDER {
+	currentOrder {
+		amount
+		state
+		phone
+		paymentType
+		id
+		goals
+		delivery
+		email
+		anonymous
+		paymentData {
+			accountId
+			amount
+			currency
+			data {
+				phone
+			}
+			description
+			email
+			publicId
+			invoiceId
+			requireEmail
+		}
+	}
+}

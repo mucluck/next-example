@@ -1,0 +1,43 @@
+{
+	"id": "nazghool",
+	"theme_color": "#3F2512",
+	"background_color": "#3F2512",
+	"display": "standalone",
+	"display_override": [
+		"fullscreen",
+		"browser"
+	],
+	"scope": "./",
+	"start_url": "./",
+	"name": "name",
+	"short_name": "short_name",
+	"description": "description",
+	"icons": [
+		{
+			"src": "./icons/16x16.svg",
+			"sizes": "16x16",
+			"type": "image/svg"
+		},
+		{
+			"src": "./icons/32x32.svg",
+			"sizes": "32x32",
+			"type": "image/svg"
+		},
+		{
+			"src": "./icons/64x64.svg",
+			"sizes": "64x64",
+			"type": "image/svg"
+		},
+		{
+			"src": "./icons/72x72.svg",
+			"sizes": "72x72",
+			"type": "image/svg"
+		},
+		{
+			"src": "./icons/144x144.svg",
+			"sizes": "144x144",
+			"type": "image/svg"
+		}
+	],
+	"orientation": "portrait-primary"
+}

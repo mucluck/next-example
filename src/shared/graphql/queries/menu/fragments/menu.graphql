@@ -1,0 +1,14 @@
+fragment Menu on menus {
+	id
+	classname
+	component
+	icon
+	mobile
+	mobileComponent: mobile_component
+	mobileOnly: mobile_only
+	subDescription: sub_desciption
+	sub: sub_json
+	subtitle: sub_title
+	title
+	url
+}

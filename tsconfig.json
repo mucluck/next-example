@@ -1,0 +1,56 @@
+{
+	"compilerOptions": {
+		"target": "es2015",
+		"lib": [
+			"dom",
+			"dom.iterable",
+			"esnext"
+		],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "preserve",
+		"incremental": true,
+		"baseUrl": ".",
+		"paths": {
+			"@/*": [
+				"./src/*"
+			],
+			"@/entities/*": [
+				"./src/entities/*"
+			],
+			"@/features/*": [
+				"./src/features/*"
+			],
+			"@/shared/*": [
+				"./src/shared/*"
+			],
+			"@/widgets/*": [
+				"./src/widgets/*"
+			],
+			"@/pages/*": [
+				"./src/pages/*"
+			],
+			"@/cache/*": [
+				"./src/emotion/*"
+			],
+		}
+	},
+	"files": [
+		"./src/graphql.d.ts"
+	],
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx"
+	],
+	"exclude": [
+		"node_modules"
+	]
+}

@@ -1,0 +1,7 @@
+mutation RATE_UPDATE($rating: Int!, $userId: bigint!, $newsId: bigint!) {
+	rate: insert_news_ratings(objects: { rating: $rating, news_id: $newsId, user_id: $userId }) {
+		returning {
+			rating
+		}
+	}
+}

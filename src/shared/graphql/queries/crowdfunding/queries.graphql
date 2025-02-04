@@ -1,0 +1,35 @@
+query PROJECTS {
+	projects: crowdfundingProjects {
+		id
+		slug
+		title
+		description
+		mainImage
+		images
+		currentAmount
+		requiredAmount
+		progress
+		sponsorsCount
+		place
+		startedAt
+		endedAt
+		tags
+		goals
+		kind
+		donation {
+			defaultAmount
+			steps
+		}
+	}
+}
+
+query TREB_PROJECTS {
+	projects: crowdfunding_projects(where: { kind: { _eq: "treb" }, deleted_at: { _is_null: true } }) {
+		id
+		payment_receiver_id
+		data
+		treb_set {
+			config
+		}
+	}
+}

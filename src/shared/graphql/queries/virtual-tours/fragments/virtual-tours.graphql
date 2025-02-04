@@ -1,0 +1,13 @@
+fragment TOUR on virtual_tours {
+	settings
+	slug
+	id
+	title_full: page_title_full
+	title_short: page_title_short
+	main_image
+	main_image_preview
+	seo
+	sections: content_blocks
+	type
+	created_at
+}

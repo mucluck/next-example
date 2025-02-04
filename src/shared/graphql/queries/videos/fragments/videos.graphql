@@ -1,0 +1,11 @@
+fragment VIDEOS on v_news {
+	type
+	title_short
+	title_full
+	teaser
+	src
+	slug
+	main_image_preview
+	main_image_mobile
+	main_image
+}

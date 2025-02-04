@@ -1,0 +1,12 @@
+query SEARCH($query: String!, $types: [String!]) {
+	search: searcheableContents(query: $query, types: $types) {
+		slug
+		title_short: pageTitleShort
+		teaser
+		title_full: pageTitleFull
+		mainImage
+		mainImagePreview
+		category: categorySlug
+		type
+	}
+}

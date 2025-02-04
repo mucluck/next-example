@@ -1,0 +1,30 @@
+query PHOTOS {
+	photos: v_all_media_photos(order_by: { updated_at: desc }, limit: 8) {
+		title_full: page_title_full
+		title_short: page_title_short
+		main_image
+		main_image_preview
+		slug
+		type
+	}
+}
+
+query PHOTOS_PATHS {
+	photos: v_all_media_photos {
+		slug
+	}
+}
+
+# v_all_media_photos
+query PHOTOS_BY_SLUG($slug: String!) {
+	photos: media_articles(where: { slug: { _eq: $slug } }) {
+		title_full: page_title_full
+		title_short: page_title_short
+		main_image
+		main_image_preview
+		slug
+		type
+		created_at
+		sections: content_blocks
+	}
+}

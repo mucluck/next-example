@@ -1,0 +1,21 @@
+#import "./fragments/pages.graphql"
+
+query PAGES {
+	pages: text_pages {
+		title_short
+		title_full
+		slug
+	}
+}
+
+query PAGES_PATHS {
+	pages: text_pages {
+		slug
+	}
+}
+
+query PAGE_BY_SLUG($slug: String!) {
+	pages: text_pages(where: { slug: { _eq: $slug } }) {
+		...PAGE
+	}
+}

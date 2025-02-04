@@ -1,0 +1,20 @@
+#import "./fragments/saints.graphql"
+
+query SAINTS {
+	saints(order_by: { sort_order: asc }) {
+		title
+		slug
+	}
+}
+
+query SAINTS_BY_SLUG($slug: String!) {
+	saints(order_by: { sort_order: asc }, where: { slug: { _eq: $slug } }) {
+		...SAINT
+	}
+}
+
+query SAINTS_PATHS {
+	saints(order_by: { sort_order: asc }) {
+		slug
+	}
+}

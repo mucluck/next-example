@@ -1,0 +1,88 @@
+query AUDIO_GUIDES_CATEGORIES {
+	audioGuides: v_media_audio_guides(distinct_on: audio_category_id) {
+		category: audio_category {
+			slug
+			main_image
+			title
+		}
+	}
+}
+
+query AUDIO_GUIDES_CATEGORIES_PATHS {
+	audioGuides: v_media_audio_guides(distinct_on: audio_category_id) {
+		category: audio_category {
+			slug
+		}
+	}
+}
+
+query AUDIO_GUIDES_CATEGORY_BY_SLUG($slug: String!) {
+	audioGuidesCategory: v_media_audio_guides(where: { audio_category: { slug: { _eq: $slug } } }) {
+		category: audio_category {
+			slug
+			main_image
+			title
+		}
+	}
+}
+
+query AUDIO_GUIDES_BY_CATEGORY($category: String!) {
+	audioGuides: v_media_audio_guides(where: { audio_category: { slug: { _eq: $category } } }) {
+		title_short: page_title_short
+		title_full: page_title_full
+		slug
+		main_image_preview
+		main_image_mobile
+		main_image
+		type
+		audio
+		teaser
+		category: audio_category {
+			slug
+		}
+	}
+}
+
+query AUDIO_GUIDES($limit: Int!, $offset: Int!) {
+	audioGuides: v_media_audio_guides(limit: $limit, offset: $offset, order_by: { sort_order: desc }) {
+		title_short: page_title_short
+		title_full: page_title_full
+		slug
+		main_image_preview
+		main_image_mobile
+		main_image
+		type
+		category: audio_category {
+			slug
+		}
+	}
+}
+
+query AUDIO_GUIDES_PATHS {
+	audioGuides: v_media_audio_guides {
+		slug
+		category: audio_category {
+			slug
+		}
+	}
+}
+
+query AUDIO_GUIDES_BY_SLUG($slug: String!) {
+	audioGuides: v_media_audio_guides(where: { slug: { _eq: $slug } }) {
+		title_short: page_title_short
+		title_full: page_title_full
+		slug
+		main_image_preview
+		main_image_mobile
+		main_image
+		type
+		audio
+		teaser
+		created_at
+		sections: content_blocks
+		category: audio_category {
+			title
+			slug
+		}
+	}
+}

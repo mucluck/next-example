@@ -1,0 +1,12 @@
+query MAP_OBJECTS {
+	objects: v_map_objects {
+		location_object
+		title_full
+		slug
+		main_image
+		city_slug
+		monastery_slug
+		type
+		settings
+	}
+}

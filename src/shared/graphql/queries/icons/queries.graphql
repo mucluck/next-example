@@ -1,0 +1,23 @@
+#import "./fragments/ikons.graphql"
+
+query IKONS {
+	ikons(order_by: { id: desc }) {
+		main_image_preview
+		main_image
+		title_full
+		title_short
+		slug
+	}
+}
+
+query ICONS($slug: String!) {
+	icons: ikons(where: { slug: { _eq: $slug } }) {
+		...IKON
+	}
+}
+
+query ICONS_PATHS {
+	icons: ikons {
+		slug
+	}
+}

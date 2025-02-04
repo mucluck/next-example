@@ -1,0 +1,18 @@
+fragment SAINT on saints {
+	title
+	main_image
+	main_image_preview
+	slug
+	location_object
+	sections: content_blocks
+	ikons: ikons_saints {
+		ikon {
+			id
+			title: page_title_full
+			title_full: page_title_short
+			image_preview: main_image_preview
+			image: main_image
+			slug
+		}
+	}
+}

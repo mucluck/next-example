@@ -1,0 +1,22 @@
+#import "./fragments/menu.graphql"
+
+query MENU {
+    top: menus(
+        order_by: { sort_order: asc }
+        where: { kind: { _eq: "topMenu" } }
+    ) {
+        ...Menu
+    }
+    main: menus(
+        order_by: { sort_order: asc }
+        where: { kind: { _eq: "sidebBar" } }
+    ) {
+        ...Menu
+    }
+    footer: menus(
+        order_by: { sort_order: asc }
+        where: { kind: { _eq: "footerMenu" } }
+    ) {
+        ...Menu
+    }
+}

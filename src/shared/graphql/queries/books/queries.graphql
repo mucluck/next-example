@@ -1,0 +1,37 @@
+query BOOKS_PATHS {
+	books {
+		slug
+	}
+}
+
+query BOOKS($limit: Int!) {
+	books(limit: $limit) {
+		title_short: page_title_short
+		title_full: page_title_full
+		sections: content_blocks
+		type
+		slug
+		settings
+		seo
+		main_image_preview
+		main_image_mobile
+		main_image
+		created_at
+	}
+}
+
+query BOOKS_BY_SLUG($slug: String!) {
+	books(where: { slug: { _eq: $slug } }) {
+		title_short: page_title_short
+		title_full: page_title_full
+		sections: content_blocks
+		type
+		slug
+		settings
+		seo
+		main_image_preview
+		main_image_mobile
+		main_image
+		created_at
+	}
+}

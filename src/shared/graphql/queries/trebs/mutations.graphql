@@ -1,0 +1,130 @@
+mutation TREB_ORDER(
+	$orderId: ID!
+	$crowdfundingProjectId: ID
+	$amount: Int
+	$rewards: [ID!]
+	$title: String
+	$email: String
+	$firstName: String
+	$phone: String
+	$delivery: String
+	$anonymous: Boolean
+	$goals: [String!]
+	$paymentType: String
+	$trebCategory: String
+	$trebType: String
+	$trebNames: [String!]
+) {
+	updateOrder(
+		input: {
+			orderId: $orderId
+			amount: $amount
+			anonymous: $anonymous
+			clientMutationId: ""
+			delivery: $delivery
+			email: $email
+			firstName: $firstName
+			goals: $goals
+			lastName: ""
+			paymentType: $paymentType
+			crowdfundingProjectId: $crowdfundingProjectId
+			phone: $phone
+			rewards: $rewards
+			title: $title
+			trebCategory: $trebCategory
+			trebType: $trebType
+			trebNames: $trebNames
+		}
+	) {
+		result
+		clientMutationId
+		order {
+			amount
+			state
+			phone
+			paymentType
+			id
+			goals
+			delivery
+			email
+			anonymous
+			paymentData {
+				accountId
+				amount
+				currency
+				data {
+					phone
+				}
+				description
+				email
+				publicId
+				invoiceId
+				requireEmail
+			}
+		}
+	}
+}
+
+mutation UPDATE_CURRENT_ORDER(
+	$crowdfundingProjectId: ID
+	$amount: Int
+	$rewards: [ID!]
+	$title: String
+	$email: String
+	$phone: String
+	$delivery: String
+	$anonymous: Boolean
+	$goals: [String!]
+	$paymentType: String
+	$trebCategory: String
+	$trebType: String
+	$trebNames: [String!]
+) {
+	order: updateCurrentOrder(
+		input: {
+			amount: $amount
+			anonymous: $anonymous
+			clientMutationId: ""
+			delivery: $delivery
+			email: $email
+			firstName: ""
+			goals: $goals
+			lastName: ""
+			paymentType: $paymentType
+			crowdfundingProjectId: $crowdfundingProjectId
+			phone: $phone
+			rewards: $rewards
+			title: $title
+			trebCategory: $trebCategory
+			trebType: $trebType
+			trebNames: $trebNames
+		}
+	) {
+		result
+		clientMutationId
+		order {
+			amount
+			state
+			phone
+			paymentType
+			id
+			goals
+			delivery
+			email
+			anonymous
+			paymentData {
+				accountId
+				amount
+				currency
+				data {
+					phone
+				}
+				description
+				email
+				publicId
+				invoiceId
+				requireEmail
+			}
+		}
+	}
+}

@@ -1,0 +1,110 @@
+query ALL_VIDEOS {
+	v_media_videos {
+		type
+		title_short
+		title_full
+		teaser
+		src
+		slug
+		main_image_preview
+		main_image_mobile
+		main_image
+	}
+}
+
+query VIDEOS_CATEGORIES_PATHS {
+	categories: v_video_categories(order_by: { sort_order: asc }, where: { video_count: { _gt: 0 } }) {
+		slug
+	}
+}
+
+query VIDEOS_CATEGORY($slug: String!) {
+	videoCategories: v_video_categories(where: { slug: { _eq: $slug } }) {
+		id
+		title_full
+		title_short
+		main_image
+		slug
+	}
+}
+
+query VIDEOS_CATEGORIES($limit: Int!) {
+	videoCategories: v_video_categories(
+		limit: $limit
+		order_by: { sort_order: desc }
+		where: { video_count: { _gt: 0 } }
+	) {
+		slug
+		title_full
+		title_short
+		main_image
+		main_image_preview
+	}
+}
+
+query ALL_VIDEOS_LIST($limit: Int!) {
+	videos: v_media_videos(limit: $limit, order_by: { updated_at: desc }) {
+		category: category_slug
+		slug
+		main_image_preview
+		main_image_mobile
+		main_image
+		title_short
+		title_full
+		teaser
+		type
+	}
+}
+
+query ALL_VIDEOS_PATHS {
+	videos: v_media_videos {
+		category: category_slug
+		slug
+	}
+}
+
+query ALL_VIDEOS_BY_CATEGORY($category: String!) {
+	videos: v_media_videos(where: { category_slug: { _eq: $category } }, order_by: { sort_order: asc }) {
+		category: category_slug
+		slug
+		main_image_preview
+		main_image_mobile
+		main_image
+		title_short
+		title_full
+		teaser
+	}
+}
+
+query VIDEOS_BY_CATEGORY($category: String!, $limit: Int!, $offset: Int!) {
+	videos: v_media_videos(
+		limit: $limit
+		offset: $offset
+		where: { category_slug: { _eq: $category } }
+		order_by: { sort_order: asc }
+	) {
+		category: category_slug
+		slug
+		main_image_preview
+		main_image_mobile
+		main_image
+		title_short
+		title_full
+		teaser
+	}
+}
+
+query VIDEO_BY_SLUG($slug: String!) {
+	videos: v_media_videos(where: { slug: { _eq: $slug } }) {
+		slug
+		main_image_preview
+		main_image_mobile
+		main_image
+		title_short
+		title_full
+		teaser
+		sections: content_blocks
+		created_at
+		src
+	}
+}

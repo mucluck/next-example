@@ -1,0 +1,19 @@
+#import "./fragments/virtual-tours.graphql"
+
+query TOURS {
+	tours: virtual_tours {
+		...TOUR
+	}
+}
+
+query TOURS_PATHS {
+	tours: virtual_tours {
+		slug
+	}
+}
+
+query TOURS_BY_SLUG($slug: String!) {
+	tours: virtual_tours(where: { slug: { _eq: $slug } }) {
+		...TOUR
+	}
+}

@@ -1,0 +1,108 @@
+#import "./fragments/news.graphql"
+
+query ALL_NEWS($limit: Int!, $offset: Int!) {
+	news: news(limit: $limit, offset: $offset, distinct_on: id, order_by: { id: desc }) {
+		...NEWS
+	}
+	categories: news(distinct_on: category_id) {
+		category {
+			value: slug
+			label: title_full
+		}
+	}
+	cities(order_by: { sort_order: asc }, where: { settings: { _contains: { project: "portal" } } }) {
+		label: title_full
+		value: slug
+	}
+}
+
+query ALL_NEWS_PATHS {
+	news: v_news(distinct_on: id) {
+		category {
+			slug
+		}
+		slug
+	}
+}
+
+query NEWS_BY_SLUG($slug: String!) {
+	news: news(where: { slug: { _eq: $slug } }) {
+		...NEWS
+		linked: linkedNews {
+			news {
+				slug
+				published_at
+				type
+				issued_at
+				main_image
+				main_image_preview
+				title_full: page_title_full
+				title_short: page_title_short
+				teaser
+				category {
+					slug
+					title_full
+				}
+			}
+		}
+	}
+}
+
+query NEWS_CATEGORIES_PATHS {
+	news: v_news(distinct_on: category_id) {
+		category {
+			slug
+		}
+	}
+}
+
+query CATEGORY($slug: String!) {
+	categories(where: { slug: { _eq: $slug } }) {
+		title_full
+		slug
+		id
+	}
+}
+
+query NEWS_PATHS {
+	news: v_news {
+		slug
+	}
+}
+
+query NEWS_BY_CATEGORY($limit: Int!, $offset: Int!, $category: [String!]) {
+	news: v_news(
+		limit: $limit
+		offset: $offset
+		distinct_on: id
+		where: { category_slug: { _in: $category } }
+		order_by: { id: desc }
+	) {
+		...V_NEWS
+	}
+	cities(order_by: { sort_order: asc }, where: { settings: { _contains: { project: "portal" } } }) {
+		label: title_full
+		value: slug
+	}
+	v_news_aggregate {
+		aggregate {
+			max {
+				updated_at
+			}
+		}
+	}
+}
+
+# FIXME: Query returns duplicate data when use v_news
+
+query NEWS_BY_CITY_AND_CATEGORY($limit: Int!, $offset: Int!, $category: [String!], $city: [String!]) {
+	news: v_news(
+		limit: $limit
+		offset: $offset
+		distinct_on: id
+		where: { category_slug: { _in: $category }, city_slug: { _in: $city } }
+		order_by: { id: desc }
+	) {
+		...V_NEWS
+	}
+}

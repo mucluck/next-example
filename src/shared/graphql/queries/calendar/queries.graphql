@@ -1,0 +1,126 @@
+query DAYS($date: date!) {
+	days(where: { date: { _eq: $date } }) {
+		date
+		name
+		old_date_style
+		new_date_style
+		title
+		type
+		week {
+			title
+		}
+		glas_name
+		days_posts {
+			post {
+				title
+				description
+				type
+				slug
+			}
+		}
+		saints: memorial_days(where: { saint: { in_calendar: { _eq: true } } }) {
+			saint {
+				title
+				rank {
+					short_name
+				}
+				slug
+				type
+
+				ikons: ikons_saints {
+					ikon {
+						title_full
+						slug
+						type
+						main_image: main_image_preview
+					}
+				}
+			}
+		}
+		gospels {
+			kind: gospel_kind {
+				title
+			}
+			text: saint_text {
+				rus: rus_text_r
+				church: church_rus_text_c
+				book: saint_book {
+					slug
+					name
+				}
+				audios: holy_audios {
+					title
+					url
+					description
+				}
+			}
+		}
+		parables {
+			title
+			text
+		}
+		food {
+			name
+		}
+		days_holidays {
+			holiday {
+				title_full
+				slug
+				images
+			}
+		}
+		liturgical_directions {
+			teaser
+			content_blocks
+		}
+	}
+}
+
+query DAYS_PATHS {
+	days(order_by: { date: asc }) {
+		date
+	}
+}
+
+query CURRENT_DAY($date: date!) {
+	days(where: { date: { _eq: $date } }) {
+		date
+		name
+		old_date_style
+		new_date_style
+		week {
+			title
+		}
+		ikons: memorial_days(limit: 2, where: { saint: { in_calendar: { _eq: true } } }) {
+			saint {
+				ikons: ikons_saints {
+					ikon {
+						title_full
+						slug
+						type
+						main_image: main_image_preview
+					}
+				}
+			}
+		}
+		saints: memorial_days(where: { saint: { in_calendar: { _eq: true } } }) {
+			saint {
+				title
+				rank {
+					short_name
+				}
+				slug
+				type
+
+				ikons: ikons_saints {
+					ikon {
+						title_full
+						slug
+						type
+						main_image: main_image_preview
+					}
+				}
+			}
+		}
+	}
+}

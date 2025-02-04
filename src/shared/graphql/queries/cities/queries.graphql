@@ -1,0 +1,586 @@
+#import "./fragments/cities.graphql"
+
+query CITIES_PATHS {
+	cities {
+		slug
+	}
+}
+
+query CITIES_BY_SLUG($slug: String!) {
+	cities(where: { slug: { _eq: $slug } }) {
+		...CITY
+		cathedrals(limit: 9, order_by: { sort_order: asc }) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			type
+			sort_order
+			settings
+			city {
+				slug
+			}
+			monastery {
+				slug
+			}
+		}
+		churches(limit: 9, order_by: { sort_order: asc }) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			type
+			sort_order
+			settings
+			city {
+				slug
+			}
+			monastery {
+				slug
+			}
+		}
+		objects: city_objects(limit: 9, order_by: { sort_order: asc }) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			type
+			settings
+			city {
+				slug
+			}
+		}
+		projects: crowdfunding_projects(limit: 9) {
+			crowdfunding_project {
+				id
+			}
+		}
+		museums(limit: 9, order_by: { sort_order: asc }) {
+			title_full
+			title_short
+			slug
+			type
+			main_image
+			main_image_mobile
+			main_image_preview
+			settings
+		}
+		temples(limit: 9, order_by: { sort_order: asc }) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			type
+			sort_order
+			settings
+			city {
+				slug
+			}
+			monastery {
+				slug
+			}
+		}
+		tours: cities_virtual_tours(limit: 9) {
+			tour: virtual_tour {
+				slug
+				settings
+				title_short
+				title_full
+				main_image_preview
+				main_image
+				main_image_mobile
+			}
+		}
+		wells(limit: 9, order_by: { sort_order: asc }) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			type
+			sort_order
+			settings
+			city {
+				slug
+			}
+			monastery {
+				slug
+			}
+		}
+		belltowers(limit: 9, order_by: { sort_order: asc }) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			type
+			sort_order
+			settings
+			city {
+				slug
+			}
+			monastery {
+				slug
+			}
+		}
+		chapels(order_by: { sort_order: asc }, limit: 9) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			type
+			sort_order
+			settings
+			city {
+				slug
+			}
+			monastery {
+				slug
+			}
+		}
+		monasteries(limit: 9) {
+			title_full
+			title_short
+			type
+			slug
+			main_image
+			main_image_preview
+			settings
+			city {
+				slug
+			}
+		}
+		news: cities_news(
+			limit: 9
+			where: { v_news: { id: { _gte: 0 } } }
+			distinct_on: news_id
+			order_by: { news_id: desc }
+		) {
+			news: v_news {
+				title_short: page_title_short
+				title_full: page_title_full
+				main_image
+				main_image_preview
+				slug
+				issued_at
+				teaser
+				category {
+					slug
+					title_full
+				}
+				settings
+			}
+		}
+		articles: cities_media_articles(limit: 9, order_by: { media_article: { issued_at: desc } }) {
+			article: media_article {
+				title_short: page_title_short
+				title_full: page_title_full
+				main_image
+				main_image_mobile
+				main_image_preview
+				slug
+				issued_at
+				settings
+				teaser
+				category {
+					slug
+					title_full
+				}
+			}
+		}
+		audios: cities_media_audios(limit: 9) {
+			media_audio {
+				title_full
+				title_short
+				main_image
+				main_image_preview
+				main_image_mobile
+				slug
+				type
+			}
+		}
+		books: cities_media_books(limit: 9) {
+			media_book {
+				title_full
+				title_short
+				main_image
+				main_image_preview
+				main_image_mobile
+				slug
+				type
+			}
+		}
+		periodics: cities_media_periodics(limit: 9) {
+			media_periodic {
+				title_full
+				title_short
+				main_image
+				main_image_preview
+				main_image_mobile
+				slug
+				type
+			}
+		}
+		photos: cities_media_photos(limit: 9) {
+			media_photo {
+				title_full
+				title_short
+				main_image
+				main_image_preview
+				main_image_mobile
+				slug
+				type
+			}
+		}
+		videos: cities_media_videos(limit: 9) {
+			media_video {
+				title_full
+				title_short
+				main_image
+				main_image_preview
+				main_image_mobile
+				slug
+				type
+			}
+		}
+
+		# geoJSONs
+
+		cathedrals_geo: cathedrals {
+			location_object
+			title_full
+			main_image
+			main_image_preview
+			settings
+		}
+		churches_geo: churches {
+			location_object
+			title_full
+			main_image
+			main_image_preview
+			settings
+		}
+		objects_geo: city_objects {
+			location_object
+			title_full
+			main_image
+			main_image_preview
+			settings
+		}
+		museums_geo: museums {
+			location_object
+			title_full
+			main_image
+			main_image_preview
+			settings
+		}
+		temples_geo: temples {
+			location_object
+			title_full
+			main_image
+			main_image_preview
+			settings
+		}
+		wells_geo: wells {
+			location_object
+			title_full
+			main_image
+			main_image_preview
+			settings
+		}
+		belltowers_geo: belltowers {
+			location_object
+			title_full
+			main_image
+			main_image_preview
+			settings
+		}
+		chapels_geo: chapels {
+			location_object
+			title_full
+			main_image
+			main_image_preview
+			settings
+		}
+		monasteries_geo: monasteries {
+			location_object
+			title_full
+			main_image
+			main_image_preview
+			settings
+		}
+	}
+}
+
+query CITY_WEATHER_BY_SLUG($slug: String!) {
+	cities(where: { slug: { _eq: $slug } }) {
+		weather
+	}
+}
+
+query CITIES {
+	cities(where: { slug: { _eq: "diveevo" } }) {
+		...CITY
+		cathedrals(order_by: { sort_order: asc }) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			location_object
+			type
+			sort_order
+			settings
+			city {
+				slug
+			}
+			monastery {
+				slug
+			}
+		}
+		churches(order_by: { sort_order: asc }) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			location_object
+			type
+			sort_order
+			settings
+			city {
+				slug
+			}
+			monastery {
+				slug
+			}
+		}
+		city_objects(order_by: { sort_order: asc }) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			location_object
+			type
+			settings
+			city {
+				slug
+			}
+		}
+		crowdfunding_projects {
+			crowdfunding_project {
+				id
+			}
+		}
+		museums(order_by: { sort_order: asc }, limit: 10) {
+			title_full
+			title_short
+			slug
+			type
+			main_image
+			main_image_mobile
+			main_image_preview
+			settings
+			location_object
+		}
+		temples(order_by: { sort_order: asc }) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			location_object
+			type
+			sort_order
+			settings
+			city {
+				slug
+			}
+			monastery {
+				slug
+			}
+		}
+		cities_virtual_tours {
+			virtual_tour {
+				slug
+				settings
+				title_short
+				title_full
+				main_image_preview
+				main_image
+				main_image_mobile
+			}
+		}
+		wells(order_by: { sort_order: asc }) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			location_object
+			type
+			sort_order
+			settings
+			city {
+				slug
+			}
+			monastery {
+				slug
+			}
+		}
+		belltowers(order_by: { sort_order: asc }) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			location_object
+			type
+			sort_order
+			settings
+			city {
+				slug
+			}
+			monastery {
+				slug
+			}
+		}
+		chapels(order_by: { sort_order: asc }, limit: 10) {
+			title_full
+			title_short
+			slug
+			main_image
+			main_image_mobile
+			main_image_preview
+			location_object
+			type
+			sort_order
+			settings
+			city {
+				slug
+			}
+			monastery {
+				slug
+			}
+		}
+		monasteries {
+			title_full
+			title_short
+			type
+			slug
+			location_object
+			main_image
+			main_image_preview
+			settings
+			city {
+				slug
+			}
+		}
+		cities_news(
+			limit: 9
+			where: { v_news: { id: { _gte: 0 } } }
+			distinct_on: news_id
+			order_by: { news_id: desc }
+		) {
+			news: v_news {
+				page_title_short
+				page_title_full
+				main_image
+				main_image_preview
+				slug
+				issued_at
+				updated_at
+				category {
+					slug
+				}
+				settings
+			}
+		}
+		cities_media_articles(order_by: { media_article: { issued_at: desc } }) {
+			media_article {
+				title_full
+				title_short
+				main_image
+				main_image_mobile
+				main_image_preview
+				slug
+				updated_at
+				settings
+			}
+		}
+		cities_media_audios {
+			media_audio {
+				title_full
+				title_short
+				main_image
+				main_image_preview
+				main_image_mobile
+				slug
+				type
+			}
+		}
+		cities_media_books {
+			media_book {
+				title_full
+				title_short
+				main_image
+				main_image_preview
+				main_image_mobile
+				slug
+				type
+			}
+		}
+		cities_media_periodics {
+			media_periodic {
+				title_full
+				title_short
+				main_image
+				main_image_preview
+				main_image_mobile
+				slug
+				type
+			}
+		}
+		cities_media_photos {
+			media_photo {
+				title_full
+				title_short
+				main_image
+				main_image_preview
+				main_image_mobile
+				slug
+				type
+			}
+		}
+		cities_media_videos {
+			media_video {
+				title_full
+				title_short
+				main_image
+				main_image_preview
+				main_image_mobile
+				slug
+				type
+			}
+		}
+	}
+}

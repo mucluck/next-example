@@ -1,0 +1,131 @@
+#import "./fragments/articles.graphql"
+
+query ALL_ARTICLES($limit: Int!, $offset: Int!) {
+	articles: media_articles(limit: $limit, offset: $offset, order_by: { published_at: desc, id: desc }) {
+		...ARTICLE
+	}
+	categories: media_articles(distinct_on: category_id) {
+		category {
+			value: slug
+			label: title_full
+		}
+	}
+	cities(order_by: { sort_order: desc }, where: { settings: { _contains: { project: "portal" } } }) {
+		label: title_full
+		value: slug
+	}
+}
+
+query ALL_ARTICLES_PATHS {
+	articles: media_articles(distinct_on: id) {
+		category {
+			slug
+		}
+		slug
+	}
+}
+
+query ARTICLES_BY_SLUG($slug: String!) {
+	articles: media_articles(where: { slug: { _eq: $slug } }) {
+		...ARTICLE
+
+		linked: linkedMediaArticles {
+			linkedMediaArticle {
+				slug
+				main_image
+				issued_at
+				published_at
+				title_full: page_title_full
+				category {
+					slug
+					title_full
+				}
+				settings
+			}
+		}
+
+		linked_news: linkedNews {
+			news {
+				slug
+				main_image
+				issued_at
+				published_at
+				title_full: page_title_full
+
+				category {
+					slug
+					title_full
+				}
+				settings
+			}
+		}
+	}
+}
+
+query ARTICLE_CATEGORIES_PATHS {
+	categories: media_articles(distinct_on: category_id) {
+		category {
+			slug
+		}
+	}
+}
+
+query ARTICLE_CATEGORIES {
+	media_articles {
+		category {
+			title_full
+			slug
+			id
+		}
+	}
+}
+
+query CATEGORY($slug: String!) {
+	categories(where: { slug: { _eq: $slug } }) {
+		title_full
+		id
+	}
+}
+
+query ARTICLES_BY_CATEGORY($category: [String!], $limit: Int!, $offset: Int!) {
+	articles: media_articles(
+		limit: $limit
+		offset: $offset
+		distinct_on: id
+		where: { category: { slug: { _in: $category } } }
+		order_by: { id: desc }
+	) {
+		...ARTICLE
+	}
+	cities(order_by: { sort_order: desc }, where: { settings: { _contains: { project: "portal" } } }) {
+		label: title_full
+		value: slug
+	}
+}
+
+query ARTICLES_BY_CITY_AND_CATEGORY($limit: Int!, $offset: Int!, $category: [String!], $city: [String!]) {
+	articles: v_media_articles(
+		limit: $limit
+		offset: $offset
+		distinct_on: id
+		where: { category: { slug: { _in: $category } }, city_slug: { _in: $city } }
+		order_by: { id: desc }
+	) {
+		title_full: page_title_full
+		title_short: page_title_short
+		main_image
+		main_image_preview
+		main_image_mobile
+		slug
+		sections: content_blocks
+		age_rating
+		type
+		settings
+		teaser
+		issued_at
+		category {
+			slug
+			title_full
+		}
+	}
+}

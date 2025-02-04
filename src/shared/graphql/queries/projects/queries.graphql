@@ -1,0 +1,29 @@
+query PROJECTS {
+	projects: Nazghool_projects {
+		id
+		main_image
+		main_image_preview
+		title_full: page_title_full
+		title_short: page_title_short
+		slug
+		sections: content_blocks
+	}
+}
+
+query PROJECT_BY_SLUG($slug: String!) {
+	projects: Nazghool_projects(where: { slug: { _eq: $slug } }) {
+		id
+		main_image
+		main_image_preview
+		title_full: page_title_full
+		title_short: page_title_short
+		slug
+		sections: content_blocks
+	}
+}
+
+query PROJECTS_PATHS {
+	projects: Nazghool_projects {
+		slug
+	}
+}

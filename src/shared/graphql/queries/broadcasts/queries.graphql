@@ -1,0 +1,65 @@
+query BROADCASTS($slug: String) {
+	broadcasts(where: { slug: { _eq: $slug } }) {
+		slug
+		src
+		settings
+		type
+		preview
+		main_image
+		main_image_preview
+		title: title_full
+		seo
+		sections: content_blocks
+		begins_at
+		schedules(order_by: { begins_at: asc }) {
+			begins_at
+			data
+		}
+	}
+	buildings: v_broadcasts(where: { slug: { _eq: $slug } }) {
+		building_id
+		building_type
+	}
+}
+
+subscription BROADCAST_SUBSCRIPTION($slug: String) {
+	broadcasts(where: { slug: { _eq: $slug } }) {
+		enabled
+		title_full
+	}
+}
+
+# query broadcastQuery($slug: String) {
+# 	broadcasts(where: { slug: { _eq: $slug } }) {
+# 		type
+# 		src
+# 		slug
+# 		enabled
+# 		begins_at
+# 		title_full
+# 		content_blocks
+# 		main_image
+# 		main_image_preview
+# 		preview
+# 		preview_mobile
+# 		seo
+# 		settings
+# 		schedules(order_by: { begins_at: asc }) {
+# 			begins_at
+# 			data
+# 		}
+# 	}
+# 	v_broadcasts(where: { slug: { _eq: $slug } }) {
+# 		slug
+# 		enabled
+# 		begins_at
+# 		title_full
+# 		content_blocks
+# 		building_id
+# 		building_type
+# 		schedules(order_by: { begins_date: asc }) {
+# 			begins_date
+# 			events
+# 		}
+# 	}
+# }

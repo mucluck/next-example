@@ -1,0 +1,95 @@
+query CATHEDRALS_PATHS {
+	cathedrals {
+		slug
+		city {
+			slug
+		}
+	}
+}
+
+query CATHEDRALS_BY_SLUG($slug: String!) {
+	cathedrals(where: { slug: { _eq: $slug } }) {
+		seo
+		main_image
+		main_image_preview
+		main_image_mobile
+		sections: content_blocks
+		title_full: page_title_full
+		title_short: page_title_short
+		location_object
+		address
+		telephone
+		openning_hours
+		settings
+		created_at
+		slug
+		monastery {
+			slug
+			title_full
+		}
+		city {
+			slug
+			title_full
+			weather
+		}
+		books {
+			title_full
+			title_short
+			main_image
+			main_image_preview
+			slug
+		}
+		news: cathedrals_news(
+			limit: 9
+			where: { v_news: { id: { _gte: 0 } } }
+			distinct_on: news_id
+			order_by: { news_id: desc }
+		) {
+			news: v_news {
+				title_full: page_title_full
+				title_short: page_title_short
+				main_image
+				main_image_preview
+				slug
+				issued_at
+				teaser
+				category {
+					slug
+					title_full
+				}
+			}
+		}
+		articles: cathedrals_media_articles(limit: 9, order_by: { media_article: { issued_at: desc } }) {
+			media_article {
+				title_full: page_title_full
+				title_short: page_title_short
+				main_image
+				main_image_mobile
+				main_image_preview
+				slug
+				teaser
+				issued_at
+				category {
+					slug
+					title_full
+				}
+			}
+		}
+		projects: crowdfunding_projects {
+			crowdfunding_project {
+				id
+				kind
+			}
+		}
+		tours: cathedrals_virtual_tours {
+			virtual_tour {
+				slug
+				title_short
+				title_full
+				main_image_preview
+				main_image
+				main_image_mobile
+			}
+		}
+	}
+}

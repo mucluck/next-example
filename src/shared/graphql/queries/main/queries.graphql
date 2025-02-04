@@ -1,0 +1,173 @@
+# TODO: Need to add query for current day
+
+query MAIN_PAGE {
+	layout: main_page(where: { type: { _eq: "main" } }) {
+		seo
+		settings
+	}
+	main_content: v_main_page_content(
+		where: { targeting_key: { _eq: "default" } }
+		limit: 10
+		offset: 0
+		order_by: { issued_at: desc }
+	) {
+		id
+		title_full: page_title_full
+		titile_short: page_title_short
+		slug
+		issued_at
+		main_image
+		main_image_mobile
+		main_image_preview
+		type
+		category_id
+		teaser
+		author {
+			name
+		}
+		category {
+			slug
+			title_full
+		}
+		total_count
+		settings
+		sections: content_blocks
+	}
+	fixed_content: main_page_fixed_contents(order_by: { position: asc }) {
+		position
+		news_id
+		media_article_id
+		components {
+			type
+		}
+		media_video {
+			id
+			slug
+			src
+			title_short: page_title_short
+			title_full: page_title_full
+			teaser
+		}
+		tours {
+			id
+			slug
+			title_short: page_title_short
+			title_full: page_title_full
+			teaser
+		}
+		news {
+			id
+			slug
+			main_image
+			main_image_preview
+			issued_at
+			title_short: page_title_short
+			title_full: page_title_full
+			teaser
+			category {
+				slug
+				title_full
+			}
+		}
+		media_article {
+			id
+			slug
+			main_image
+			main_image_mobile
+			issued_at
+			title_short: page_title_short
+			title_full: page_title_full
+			teaser
+			category {
+				slug
+				title_full
+			}
+		}
+	}
+	banners(where: { params: { _contains: { enabled: true } } }) {
+		title
+		params
+		link
+	}
+	articles: v_main_page_content(
+		limit: 5
+		where: {
+			type: { _eq: "media_article" }
+			targeting_key: { _eq: "default" }
+			settings: { _contains: { is_main: true } }
+		}
+		order_by: { issued_at: desc }
+	) {
+		title_full: page_title_full
+		title_short: page_title_short
+		sections: content_blocks
+		slug
+		issued_at
+		main_image
+		main_image_mobile
+		main_image_preview
+		teaser
+		author {
+			name
+		}
+		category {
+			slug
+			title_full
+		}
+		settings
+	}
+	news: v_main_page_content(
+		limit: 5
+		where: { type: { _eq: "news" }, targeting_key: { _eq: "default" }, settings: { _contains: { is_main: true } } }
+		order_by: { issued_at: desc }
+	) {
+		title_full: page_title_full
+		title_short: page_title_short
+		slug
+		issued_at
+		main_image
+		main_image_preview
+		teaser
+		type
+		author {
+			name
+		}
+		category {
+			slug
+			title_full
+		}
+		settings
+		sections: content_blocks
+	}
+	v_main_page_content_aggregate {
+		aggregate {
+			max {
+				updated_at
+			}
+		}
+	}
+}
+
+query MAIN_PAGE_PARTIAL($limit: Int!, $offset: Int!) {
+	main_content: v_main_page_content(
+		where: { targeting_key: { _eq: "default" } }
+		limit: $limit
+		offset: $offset
+		order_by: { issued_at: desc }
+	) {
+		id
+		title_full: page_title_full
+		titile_short: page_title_short
+		slug
+		issued_at
+		main_image
+		main_image_mobile
+		main_image_preview
+		type
+		teaser
+		category {
+			slug
+			title_full
+		}
+	}
+}

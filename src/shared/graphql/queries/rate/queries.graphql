@@ -1,0 +1,12 @@
+query RATE($userId: bigint!, $newsId: bigint!) {
+	rate: news_ratings_aggregate(where: { news_id: { _eq: $newsId } }) {
+		aggregate {
+			avg {
+				rating
+			}
+		}
+	}
+	self: news_ratings(where: { user_id: { _eq: $userId }, news_id: { _eq: $newsId } }) {
+		rating
+	}
+}

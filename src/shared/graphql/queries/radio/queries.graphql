@@ -1,0 +1,9 @@
+query RADIO {
+	radio {
+		id
+		source
+		title: title_full
+		main_image
+		main_image_preview
+	}
+}

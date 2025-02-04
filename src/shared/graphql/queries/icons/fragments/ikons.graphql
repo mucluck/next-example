@@ -1,0 +1,18 @@
+fragment IKON on ikons {
+	id
+	main_image
+	main_image_preview
+	title: page_title_full
+	title_short: page_title_short
+	slug
+	type
+	sections: content_blocks
+	saints: ikons_saints {
+		saint {
+			title
+			main_image
+			main_image_preview
+			slug
+		}
+	}
+}

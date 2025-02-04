@@ -1,0 +1,83 @@
+query TEMPLES_PATHS {
+	temples {
+		slug
+		city {
+			slug
+		}
+	}
+}
+
+query TEMPLES_BY_SLUG($slug: String!) {
+	temples(where: { slug: { _eq: $slug } }) {
+		seo
+		main_image
+		main_image_mobile
+		sections: content_blocks
+		title_full: page_title_full
+		title_short: page_title_short
+		location_object
+		address
+		telephone
+		openning_hours
+		slug
+		settings
+		created_at
+		city {
+			title_full
+			slug
+			weather
+		}
+		monastery {
+			slug
+		}
+		# books {
+		# 	title_full
+		# 	title_short
+		# 	main_image
+		# 	main_image_preview
+		# 	slug
+		# }
+		news: news_temples(order_by: { news: { issued_at: desc } }) {
+			news {
+				title_short: page_title_short
+				title_full: page_title_full
+				main_image
+				main_image_preview
+				slug
+				issued_at
+				teaser
+				category {
+					slug
+					title_full
+				}
+			}
+		}
+		articles: media_articles_temples(order_by: { media_article: { issued_at: desc } }) {
+			media_article {
+				title_short: page_title_short
+				title_full: page_title_full
+				main_image
+				main_image_mobile
+				main_image_preview
+				slug
+				settings
+				issued_at
+				teaser
+				category {
+					slug
+					title_full
+				}
+			}
+		}
+		tours: temples_virtual_tours {
+			virtual_tour {
+				slug
+				title_short
+				title_full
+				main_image_preview
+				main_image
+				main_image_mobile
+			}
+		}
+	}
+}

@@ -1,0 +1,24 @@
+fragment CITY on cities {
+	main_image
+	main_image_mobile
+	main_image_preview
+	sections: content_blocks
+	title_full: page_title_full
+	title_short: page_title_short
+	id
+	location_object
+	address
+	telephone
+	openning_hours
+	seo
+	slug
+	type
+	area
+	first_mention
+	founded_date
+	prev_names
+	population
+	weather
+	settings
+	created_at
+}

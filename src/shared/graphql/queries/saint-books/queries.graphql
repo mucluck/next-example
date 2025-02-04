@@ -1,0 +1,22 @@
+query ALL_BOOKS {
+	books: saint_books {
+		title: name
+		slug
+		sections: content_blocks
+	}
+}
+
+query ALL_BOOKS_PATHS {
+	books: saint_books(where: { content_blocks: { _is_null: false } }) {
+		slug
+	}
+}
+
+query BOOK_BY_SLUG($slug: String!) {
+	books: saint_books(where: { slug: { _eq: $slug } }) {
+		title: name
+		slug
+		sections: content_blocks
+	}
+}
+
